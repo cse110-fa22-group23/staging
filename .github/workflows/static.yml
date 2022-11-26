@@ -39,7 +39,8 @@ jobs:
           cd staging
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          git submodule update --remote --merge
+          git submodule sync
+          git submodule update --remote
           git diff
           git add .
           git commit -m $GITHUB_SHA
