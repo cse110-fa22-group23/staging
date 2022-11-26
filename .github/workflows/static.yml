@@ -8,6 +8,7 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -38,8 +39,7 @@ jobs:
           cd staging
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          git submodule sync
-          git submodule update --remote
+          git submodule update --remote --merge
           git diff
           git add .
           git commit -m $GITHUB_SHA
