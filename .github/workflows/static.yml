@@ -35,6 +35,7 @@ jobs:
           path: 'staging'
           token: ${{ secrets.ACTION_PAT }}
       - name: Update and commit new submodule reference
+        continue-on-error: true
         run: |
           cd staging
           git config --global user.name github-actions
@@ -47,7 +48,6 @@ jobs:
           git commit -m $GITHUB_SHA
           git status
           git push
-          exit 0
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
