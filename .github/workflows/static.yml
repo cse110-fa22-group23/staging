@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          submodules: 'true'
+          # submodules: 'true' # this does not work bc git does a shallow copy and you can't switch branches
           path: 'staging'
           token: ${{ secrets.ACTION_PAT }}
       - name: Update and commit new submodule reference
@@ -39,6 +39,9 @@ jobs:
           cd staging
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
+          git submodule update --init --recursive
+          git submodule sync
+          git submodule update --remote
           git diff
           git add .
           git commit -m $GITHUB_SHA
